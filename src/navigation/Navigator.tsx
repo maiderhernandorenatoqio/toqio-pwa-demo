@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import './navigator.styles.css'
+
 type RouteProps = {
-    component: any;
+    Component: any;
     path: string;
     name: string
 }
@@ -13,24 +15,30 @@ type NavigatorProps = {
 const Navigator: React.FC<NavigatorProps> = ({ routes }) => {
     return (
         <Router>
-            <nav>
-                <ul>
-                    {routes.map(({ path, name }) => (
-                        <li key={path}>
-                            <Link to={path}>{name}</Link>
-                        </li>
+            <div>
+                <nav>
+                    <ul>
+                        {routes.map(({ path, name }) => (
+                            <li key={path}>
+                                <Link to={path}>{name}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                <Routes>
+                    {routes.map(({ Component, path }, index) => (
+                        <Route
+                            key={index}
+                            path={path}
+                            element={<Component />}
+                        />
                     ))}
-                </ul>
-            </nav>
-            <Routes>
-                {routes.map(({ component, path }) => (
-                    <Route path={path} key={path}>
-                        {component}
-                    </Route>
-                ))}
-            </Routes>
+                </Routes>
+            </div>
         </Router>
     )
 };
+
 
 export default Navigator;

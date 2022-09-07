@@ -7,8 +7,8 @@ import Home from "./screens/Home";
 const App: React.FC = () => (
   <Navigator
     routes={[
-      { component: Home, path: '/', name: 'Home' },
-      { component: About, path: '/about', name: 'About' }
+      { Component: Home, path: '/', name: 'Home' },
+      { Component: About, path: '/about', name: 'About' }
     ]}
   />
 );
